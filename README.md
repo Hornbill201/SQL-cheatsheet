@@ -5,7 +5,9 @@
 
 ## Manipulation  
 
-```CREATE TABLE celebs (id INTEGER, name TEXT, age INTEGER);```
+```
+CREATE TABLE celebs (id INTEGER, name TEXT, age INTEGER);
+```
 
 This `CREATE` statement creates a new table in the database named `celebs`. You can use the `CREATE` statement anytime you want to create a new table from scratch.
 
