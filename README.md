@@ -4,7 +4,7 @@
 
 ## Manipulation  
 
-```
+```sql
 CREATE TABLE celebs (id INTEGER, name TEXT, age INTEGER);
 ```
 
@@ -26,7 +26,7 @@ This `CREATE` statement creates a new table in the database named `celebs`. You 
 
 Add a row to the table. In the code editor type
 
-```
+```sql
 INSERT INTO celebs (id, name, age) VALUES (1, 'Justin Bieber', 21);
 ```
 
@@ -46,7 +46,7 @@ This `INSERT` statement inserts new rows into a table. You can use the `INSERT` 
 
 
 
-```
+```sql
 SELECT name FROM celebs;
 ```
 
@@ -58,7 +58,7 @@ SELECT name FROM celebs;
 
 You can also query data from all columns in a table with `SELECT`.
 
-```
+```sql
 SELECT * FROM celebs;
 ```
 
@@ -68,7 +68,7 @@ SELECT * FROM celebs;
 
 
 
-```
+```sql
 UPDATE celebs
 SET age = 22
 WHERE id = 1;
@@ -87,7 +87,7 @@ The `UPDATE` statement edits a row in the table. You can use the `UPDATE` statem
 
 
 
-```
+```sql
 ALTER TABLE celebs ADD COLUMN twitter_handle TEXT;
 ```
 
@@ -104,7 +104,7 @@ The `ALTER TABLE` statement added a new column to the table. You can use this co
 
 
 
-```
+```sql
 DELETE FROM celebs WHERE twitter_handle IS NULL;
 ```
 
@@ -131,7 +131,7 @@ The `DELETE FROM` statement deletes one or more rows from a table. You can use t
 
 
 
-```
+```sql
 SELECT name, imdb_rating FROM movies;
 ```
 
@@ -141,7 +141,7 @@ Multiple columns can be queried at once by separating column names with a comma.
 
 
 
-```
+```sql
 SELECT DISTINCT genre FROM movies;
 ```
 
@@ -159,7 +159,7 @@ The rest of this lesson will teach you different commands in SQL to filter the r
 
 
 
-```
+```sql
 SELECT * FROM movies
   WHERE imdb_rating > 8;
 ```
@@ -183,7 +183,7 @@ There are also some special operators that we will learn more about in the upcom
 
 
 
-```
+```sql
 SELECT * FROM movies
 WHERE name LIKE 'Se_en';
 ```
@@ -200,7 +200,7 @@ WHERE name LIKE 'Se_en';
 
 
 
-```
+```sql
 SELECT * FROM movies
 WHERE name LIKE 'A%';
 ```
@@ -212,7 +212,7 @@ This statement filters the result set to only include movies with names that beg
 - `A%` matches all movies with names that begin with "A"
 - `%a` matches all movies that end with "a"
 
-```
+```sql
 SELECT * FROM movies WHERE name LIKE '%man%';
 ```
 
@@ -222,14 +222,14 @@ You can use `%` both before and after a pattern. Here, any movie that contains t
 
 The `BETWEEN` operator is used to filter the result set within a certain range. The values can be numbers, text or dates.
 
-```
+```sql
 SELECT * FROM movies
 WHERE name BETWEEN 'A' AND 'J';
 ```
 
 This statement filters the result set to only include movies with `name`s that begin with letters "A" up to but not including "J".
 
-```
+```sql
 SELECT * FROM movies WHERE year BETWEEN 1990 AND 2000;
 ```
 
@@ -237,7 +237,7 @@ In this statement, the `BETWEEN` operator is being used to filter the result set
 
 
 
-```
+```sql
   SELECT * FROM movies
   WHERE year BETWEEN 1990 and 2000
   AND genre = 'comedy';
@@ -254,7 +254,7 @@ Sometimes you want to combine multiple conditions in a `WHERE` clause to make th
 
 
 
-```
+```sql
   SELECT * FROM movies
   WHERE genre = 'comedy'
   OR year < 1980;
@@ -270,7 +270,7 @@ The `OR` operator can also be used to combine more than one condition in a `WHER
 
 
 
-```
+```sql
 SELECT * FROM movies
 ORDER BY imdb_rating DESC;
 ```
@@ -287,7 +287,7 @@ It is also possible to sort the results in *ascending order*. `ASC` is a keyword
 
 
 
-```
+```sql
 SELECT * FROM movies
 ORDER BY imdb_rating DESC
 LIMIT 3;
@@ -313,7 +313,7 @@ Sometimes even filtered results can return thousands of rows in large databases.
 
 
 
-```
+```sql
 SELECT COUNT(*) FROM fake_apps;
 ```
 
@@ -323,7 +323,7 @@ The fastest way to calculate the number of rows in a table is to use the `COUNT(
 
 
 
-```
+```sql
 SELECT price, COUNT(*) FROM fake_apps
 GROUP BY price;
 ```
@@ -338,13 +338,13 @@ It is usually helpful to `SELECT` the column you pass as an argument to `GROUP B
 
 Count the total number of apps at each price that have been downloaded more than 20,000 times. 
 
-```
+```sql
 SELECT price, COUNT(*) FROM fake_apps WHERE downloads > 20000 GROUP BY price;
 ```
 
 
 
-```
+```sql
 SELECT SUM(downloads) FROM fake_apps;
 ```
 
@@ -354,7 +354,7 @@ SQL makes it easy to add all values in a particular column using `SUM()`.
 
 
 
-```
+```sql
 SELECT MAX(downloads) FROM fake_apps;
 ```
 
@@ -366,13 +366,13 @@ You can find the largest value in a column by using `MAX()`.
 
 Return the names of the most downloaded apps in each category.
 
-```
+```sql
 SELECT name, category, MAX(downloads) FROM fake_apps GROUP BY category;
 ```
 
 
 
-```
+```sql
 SELECT MIN(downloads) FROM fake_apps;
 ```
 
@@ -380,7 +380,7 @@ Similar to `MAX()`, SQL also makes it easy to return the smallest value in a col
 
 
 
-```
+```sql
 SELECT AVG(downloads) FROM fake_apps;
 ```
 
@@ -390,7 +390,7 @@ The `AVG()` function works by taking a column name as an argument and returns th
 
 
 
-```
+```sql
 SELECT price, ROUND(AVG(downloads), 2) FROM fake_apps
 GROUP BY price;
 ```
@@ -403,7 +403,7 @@ By default, SQL tries to be as precise as possible without rounding. We can make
 
 Round the average number of downloads to the nearest integer for each price. 
 
-```
+```sql
 SELECT price, ROUND(AVG(downloads)) FROM fake_apps
 GROUP BY price;
 ```
@@ -434,11 +434,11 @@ The data in these tables are related to each other. Through SQL, we can write qu
 
 We have created a table named `albums`for you. Create a second table named `artists`. 
 
-```
+```sql
 CREATE TABLE artists(id INTEGER PRIMARY KEY, name TEXT);
 ```
 
-```
+```sql
 CREATE TABLE artists(id INTEGER PRIMARY KEY, name TEXT)
 ```
 
@@ -455,7 +455,7 @@ A table can not have more than one `PRIMARY KEY` column.
 
 
 
-```
+```sql
 SELECT * FROM albums WHERE artist_id = 3;
 SELECT * FROM artists WHERE id = 3;
 ```
