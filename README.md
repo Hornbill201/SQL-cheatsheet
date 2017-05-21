@@ -1,11 +1,10 @@
 # SQL cheatsheet
-SQL Cheatsheet
 
-## Manipulation  
+### Manipulation  
 
-## Queries  
+### Queries  
 
-## Aggregrate Functions  
+### Aggregrate Functions  
 
 ## Multiple Tables
 
