@@ -297,6 +297,113 @@ Sometimes even filtered results can return thousands of rows in large databases.
 
 
 
-## Aggregrate Functions  
+## Aggregate Functions  
+
+### Database Schema
+
+| fake_apps200 rows |         |
+| ----------------- | ------- |
+| id                | INTEGER |
+| name              | TEXT    |
+| category          | TEXT    |
+| downloads         | INTEGER |
+| price             | REAL    |
+
+
+
+```
+SELECT COUNT(*) FROM fake_apps;
+```
+
+The fastest way to calculate the number of rows in a table is to use the `COUNT()` function.
+
+`COUNT()` is a function that takes the name of a column as an argument and counts the number of rows where the column is not `NULL`. Here, we want to count every row so we pass `*` as an argument.
+
+
+
+```
+SELECT price, COUNT(*) FROM fake_apps
+GROUP BY price;
+```
+
+Aggregate functions are more useful when they organize data into groups.
+
+`GROUP BY` is a clause in SQL that is only used with aggregate functions. It is used in collaboration with the `SELECT` statement to arrange identical data into groups.
+
+Here, our aggregate function is `COUNT()` and we are passing `price` as an argument to `GROUP BY`. SQL will count the total number of apps for each `price` in the table.
+
+It is usually helpful to `SELECT` the column you pass as an argument to `GROUP BY`. Here we select `price` and `COUNT(*)`. You can see that the result set is organized into two columns making it easy to see the number of apps at each price.
+
+Count the total number of apps at each price that have been downloaded more than 20,000 times. 
+
+```
+SELECT price, COUNT(*) FROM fake_apps WHERE downloads > 20000 GROUP BY price;
+```
+
+
+
+```
+SELECT SUM(downloads) FROM fake_apps;
+```
+
+SQL makes it easy to add all values in a particular column using `SUM()`.
+
+`SUM()` is a function that takes the name of a column as an argument and returns the sum of all the values in that column. Here, it adds all the values in the `downloads` column.
+
+
+
+```
+SELECT MAX(downloads) FROM fake_apps;
+```
+
+You can find the largest value in a column by using `MAX()`.
+
+`MAX()` is a function that takes the name of a column as an argument and returns the largest value in that column. Here, we pass `downloads`as an argument so it will return the largest value in the `downloads` column.
+
+
+
+Return the names of the most downloaded apps in each category.
+
+```
+SELECT name, category, MAX(downloads) FROM fake_apps GROUP BY category;
+```
+
+
+
+```
+SELECT MIN(downloads) FROM fake_apps;
+```
+
+Similar to `MAX()`, SQL also makes it easy to return the smallest value in a column by using the `MIN()` function. `MIN()` is a function that takes the name of a column as an argument and returns the smallest value in that column. Here, we pass `downloads`as an argument so it will return the smallest value in the `downloads` column.
+
+
+
+```
+SELECT AVG(downloads) FROM fake_apps;
+```
+
+This statement returns the average number of downloads for an app in our database. SQL uses the `AVG()` function to quickly calculate the average value of a particular column.
+
+The `AVG()` function works by taking a column name as an argument and returns the average value for that column.
+
+
+
+```
+SELECT price, ROUND(AVG(downloads), 2) FROM fake_apps
+GROUP BY price;
+```
+
+By default, SQL tries to be as precise as possible without rounding. We can make the result set easier to read using the `ROUND()` function.
+
+`ROUND()` is a function that takes a column name and an integer as an argument. It rounds the values in the column to the number of decimal places specified by the integer. Here, we pass the column `AVG(downloads)` and `2` as arguments. SQL first calculates the average for each price and then rounds the result to two decimal places in the result set.
+
+
+
+Round the average number of downloads to the nearest integer for each price. 
+
+```
+SELECT price, ROUND(AVG(downloads)) FROM fake_apps
+GROUP BY price;
+```
 
 ## Multiple Tables
