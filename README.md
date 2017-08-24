@@ -534,7 +534,7 @@ The `SUBSTR` functions return a portion of `char`, beginning at character `posit
 
   The following example returns several specified substrings of "ABCDEFG":
 
-  ```
+  ```sql
   SELECT SUBSTR('ABCDEFG',3,4) "Substring"
        FROM DUAL;
    
