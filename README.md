@@ -521,3 +521,31 @@ WHERE
 `AS` is a keyword in SQL that allows you to rename a column or table using an *alias*. The new name can be anything you want as long as you put it inside of single quotes. Here we want to rename the `albums.name` column as `'Album'`, and the `artists.name` column as `'Artist'`.
 
 It is important to note that the columns have not been renamed in either table. The aliases only appear in the result set.
+
+## Some other commands:
+The `SUBSTR` functions return a portion of `char`, beginning at character `position`, `substring_length` characters long. `SUBSTR` calculates lengths using characters as defined by the input character set. `SUBSTRB` uses bytes instead of characters. `SUBSTRC` uses Unicode complete characters. `SUBSTR2` uses UCS2 code points. `SUBSTR4`uses UCS4 code points.
+
+- If `position` is 0, then it is treated as 1.
+- If `position` is positive, then Oracle Database counts from the beginning of `char` to find the first character.
+- If `position` is negative, then Oracle counts backward from the end of `char`.
+- If `substring_length` is omitted, then Oracle returns all characters to the end of `char`. If `substring_length` is less than 1, then Oracle returns null.
+
+- Examples
+
+  The following example returns several specified substrings of "ABCDEFG":
+
+  ```
+  SELECT SUBSTR('ABCDEFG',3,4) "Substring"
+       FROM DUAL;
+   
+  Substring
+  ---------
+  CDEF
+
+  SELECT SUBSTR('ABCDEFG',-5,4) "Substring"
+       FROM DUAL;
+
+  Substring
+  ---------
+  CDEF
+  ```
